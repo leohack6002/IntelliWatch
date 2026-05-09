@@ -5,6 +5,13 @@ from pathlib import Path
 DB_PATH = Path(__file__).resolve().parents[1] / "backend" / "database" / "intelliwatch.sqlite"
 
 
+class SafeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, bool):
+            return int(obj)
+        return super().default(obj)
+
+
 class MetricStore:
     def __init__(self, path=DB_PATH):
         self.path = Path(path)
@@ -26,6 +33,11 @@ class MetricStore:
     def insert(self, packet):
         self.connection.execute(
             "INSERT INTO metric_events(timestamp, status, health_score, payload) VALUES (?, ?, ?, ?)",
-            (packet["timestamp"], packet["status"], packet["health_score"], json.dumps(packet)),
+            (
+                packet["timestamp"],
+                packet["status"],
+                packet["health_score"],
+                json.dumps(packet, cls=SafeEncoder),
+            ),
         )
         self.connection.commit()
