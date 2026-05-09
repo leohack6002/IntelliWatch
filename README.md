@@ -1,6 +1,18 @@
 # IntelliWatch
 
+![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![Platform](https://img.shields.io/badge/platform-Windows-blue?logo=windows)
+![Python](https://img.shields.io/badge/python-3.11+-yellow?logo=python)
+![Node](https://img.shields.io/badge/node-20LTS-green?logo=node.js)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/status-active-brightgreen)
+
 IntelliWatch is an AI-powered desktop monitoring application for Windows. It runs as a lightweight Electron app, streams live system telemetry from a Python monitoring engine, and displays a compact futuristic overlay at the bottom-right of the screen. Clicking the overlay opens a full dashboard with charts, alerts, active processes, AI insights, and system health scoring.
+
+## Preview
+
+> Screenshots and demo GIF coming soon.
+> (Add overlay screenshot and dashboard screenshot here)
 
 ## Highlights
 
@@ -34,40 +46,25 @@ IntelliWatch is an AI-powered desktop monitoring application for Windows. It run
 - Python 3.11 or newer
 - Git
 
-## Download and Install (For Normal Users)
-
-- Go to GitHub Releases.
-- Download `IntelliWatch-Setup-vX.X.X.exe`.
-- Double-click the installer to install IntelliWatch.
-- The app auto-starts on the next Windows login.
-
-## Developer Setup (For Contributors)
-
-1. Install Git, Node.js LTS, and Python 3.11+.
-2. Clone the repo.
-3. Double-click `start.bat`.
-4. The overlay appears after about 30 seconds.
-
-## System Requirements
-
-- Windows 10 or Windows 11
-- Node.js LTS
-- Python 3.11+
-
 ## Quick Start
 
+### For Normal Users
+1. Go to [Releases](https://github.com/leohack6002/IntelliWatch/releases)
+2. Download **IntelliWatch Setup 0.1.0.exe**
+3. Double-click to install
+4. App auto-starts on next Windows login
+5. No terminal or coding needed!
+
+### For Developers
 ```powershell
-git clone <repository-url>
-cd intelliwatch
+git clone https://github.com/leohack6002/IntelliWatch.git
+cd IntelliWatch
 ```
+Then double-click **start.bat**
 
-Then double-click:
-
-```text
-start.bat
-```
-
-`start.bat` is a unified launcher. It automatically runs the installation if it's the first time you've opened the app, and then launches the monitoring engine and dashboard.
+`start.bat` is a unified launcher. It automatically runs the
+installation if it is the first time you have opened the app,
+and then launches the monitoring engine and dashboard.
 
 The launch command starts:
 
@@ -75,9 +72,32 @@ The launch command starts:
 - React UI at `http://127.0.0.1:5173`
 - Electron desktop shell
 
-The overlay appears after the configured startup delay (default is 30 seconds). This allows the system to stabilize before telemetry starts. You can adjust this in the `.env` file via `INTELLIWATCH_STARTUP_DELAY_MS`.
+The overlay appears after the configured startup delay (default
+is 30 seconds). This allows the system to stabilize before
+telemetry starts. You can adjust this in the `.env` file via
+`INTELLIWATCH_STARTUP_DELAY_MS`.
 
 During the delay, the tray tooltip shows startup progress messages.
+
+## Download and Install (For Normal Users)
+
+- Go to [GitHub Releases](https://github.com/leohack6002/IntelliWatch/releases)
+- Download **IntelliWatch Setup 0.1.0.exe**
+- Double-click the installer to install IntelliWatch
+- The app auto-starts on the next Windows login
+
+## Developer Setup (For Contributors)
+
+1. Install Git, Node.js LTS, and Python 3.11+
+2. Clone the repo
+3. Double-click `start.bat`
+4. The overlay appears after about 30 seconds
+
+## System Requirements
+
+- Windows 10 or Windows 11
+- Node.js LTS
+- Python 3.11+
 
 ## Developer Commands
 
@@ -123,7 +143,9 @@ INTELLIWATCH_API_TOKEN=
 VITE_INTELLIWATCH_WS_URL=ws://127.0.0.1:8765
 ```
 
-If `INTELLIWATCH_API_TOKEN` is set, FastAPI requests must include `X-API-Token` with the same value. If it is unset, backend auth is skipped for local development.
+If `INTELLIWATCH_API_TOKEN` is set, FastAPI requests must include
+`X-API-Token` with the same value. If it is unset, backend auth
+is skipped for local development.
 
 ## Build Installer
 
@@ -145,17 +167,34 @@ Installer output is written to:
 installer/dist/
 ```
 
+## Current Status
+
+| Feature | Status |
+|---|---|
+| Python monitoring engine | ✅ Working |
+| React dashboard | ✅ Working |
+| Electron overlay | ✅ Working |
+| WebSocket live updates | ✅ Working |
+| AI anomaly detection | ✅ Working |
+| SQLite history | ✅ Working |
+| Windows installer | ✅ Working |
+| Auto-start on login | ✅ Working |
+| GPU monitoring | ⚠️ Hardware dependent |
+| Bundled Python runtime | 🔜 Planned |
+| Auto-update support | 🔜 Planned |
+| Linux / macOS support | 🔜 Planned |
+
 ## Known Limitations
 
-- GPU monitoring may be unavailable on unsupported systems.
-- Auto-start works only with the packaged installer, not dev mode.
+- GPU monitoring may be unavailable on unsupported systems
+- Auto-start works only with the packaged installer, not dev mode
 
 ## Troubleshooting
 
-- `node` not recognized: reinstall Node.js LTS.
-- `python` not recognized: reinstall Python with Add to PATH.
-- Overlay delay: wait 30 seconds, this is normal.
-- GPU shows unavailable: hardware not supported, other features still work.
+- `node` not recognized: reinstall Node.js LTS
+- `python` not recognized: reinstall Python with Add to PATH
+- Overlay delay: wait 30 seconds, this is normal
+- GPU shows unavailable: hardware not supported, other features still work
 
 ## Project Structure
 
@@ -189,10 +228,21 @@ IntelliWatch/
 - [Product Spec](docs/PRODUCT_SPEC.md)
 - [WebSocket Protocol](desktop/websocket/protocol.md)
 
-## Current Status
+## Contributing
 
-This is a functional startup-ready scaffold. Development mode is ready for contributors. Production packaging is prepared through Electron Builder, but a future release should bundle the Python runtime or document Python as an installer prerequisite.
+Contributions are welcome!
+
+- Fork the repository
+- Create a feature branch: `git checkout -b feature/your-feature`
+- Commit your changes: `git commit -m "Add your feature"`
+- Push to the branch: `git push origin feature/your-feature`
+- Open a Pull Request
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines.
 
 ## License
 
 MIT
+
+---
+Made with ❤️ by [Leopold Limson](https://github.com/leohack6002)
