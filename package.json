@@ -13,8 +13,10 @@
     "dev:engine": "powershell -ExecutionPolicy Bypass -File scripts/run-engine-windows.ps1",
     "start": "electron .",
     "check:python": "python scripts/check_python.py",
+    "generate:icons": "node scripts/generate-icons.js",
+    "prebuild": "npm run generate:icons",
     "build:ui": "npm --prefix desktop/react-ui run build",
-    "build": "npm run build:ui && electron-builder",
+    "build": "npm --prefix desktop/react-ui run build && electron-builder",
     "backend": "python -m uvicorn backend.fastapi.main:app --reload --host 127.0.0.1 --port 8787"
   },
   "keywords": [
@@ -33,8 +35,11 @@
     "python": ">=3.11.0"
   },
   "dependencies": {
+    "canvas": "^3.2.3",
     "concurrently": "^9.1.2",
     "dotenv": "^16.4.7",
+    "png2icons": "^2.0.1",
+    "sharp": "^0.34.5",
     "wait-on": "^8.0.2"
   },
   "devDependencies": {
@@ -50,16 +55,49 @@
     "files": [
       "desktop/electron/**/*",
       "desktop/react-ui/dist/**/*",
-      "monitoring-engine/**/*",
-      "assets/**/*",
-      "package.json"
+      "assets/icon.png",
+      "assets/icon@2x.png",
+      "assets/icon.ico",
+      "!**/.venv/**",
+      "!**/venv/**",
+      "!**/node_modules/**",
+      "!**/monitoring-engine/**",
+      "!**/__pycache__/**",
+      "!**/*.pyc",
+      "!**/docs/**",
+      "!**/installer/dist/**",
+      "!**/.git/**",
+      "!**/backend/**",
+      "!**/*.md",
+      "!**/*.log",
+      "!**/*.map",
+      "!desktop/react-ui/src/**",
+      "!desktop/react-ui/node_modules/**",
+      "!desktop/react-ui/public/**"
     ],
-    "asarUnpack": [
-      "monitoring-engine/**/*"
+    "extraResources": [
+      {
+        "from": "monitoring-engine",
+        "to": "monitoring-engine",
+        "filter": [
+          "**/*.py",
+          "!__pycache__/**",
+          "!*.pyc"
+        ]
+      }
     ],
+    "compression": "maximum",
+    "buildDependenciesFromSource": false,
     "win": {
       "target": "nsis",
+      "icon": "assets/icon.ico",
       "signAndEditExecutable": false
+    },
+    "mac": {
+      "icon": "assets/icon.png"
+    },
+    "linux": {
+      "icon": "assets/icon.png"
     }
   }
 }

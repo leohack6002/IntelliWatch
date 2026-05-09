@@ -109,25 +109,43 @@ This starts:
 
 ## 6. Wait for the Overlay
 
-The floating IntelliWatch overlay appears after around 30 seconds.
+The floating IntelliWatch overlay appears after around 30 seconds at the bottom-right of your screen.
 
-This delay is normal. The app waits so the computer can become stable after startup.
-During the wait, the tray tooltip cycles through startup messages such as "IntelliWatch is starting...", "Waiting for system to stabilize...", and "Almost ready...".
+This delay is normal. The app waits so the computer can become stable after startup. During the wait, the tray tooltip cycles through startup messages.
+
+The overlay shows live:
+- CPU, RAM, Disk, Battery, Uptime
+- WiFi signal strength
+- Download and upload speeds
 
 ## 7. Open the Dashboard
 
 Click the floating overlay to open the full dashboard.
 
-The dashboard shows:
+The overlay shows:
 
 1. CPU usage
 2. RAM usage
-3. GPU usage
-4. Temperature
-5. Network speed
-6. Active processes
-7. AI insights
-8. Alerts
+3. Disk usage
+4. Battery percentage
+5. System uptime
+6. WiFi signal strength
+7. Download speed
+8. Upload speed
+
+The full dashboard shows:
+
+1. CPU usage with live graph
+2. RAM usage with live graph
+3. GPU usage (hardware dependent)
+4. Temperature (hardware dependent)
+5. Disk usage
+6. Battery health
+7. Network speed
+8. Active processes
+9. AI insights and anomaly detection
+10. System health score
+11. Alerts and warnings
 
 ## 8. Stop the Application
 
@@ -225,6 +243,24 @@ Wait around 30 seconds. This is expected.
 ### GPU monitoring is unavailable
 
 Some systems do not expose GPU data to `GPUtil`. IntelliWatch shows "GPU monitoring not supported on this system" on the dashboard, and other monitoring features will still work.
+
+### Temperature shows 0C
+
+Some systems do not expose temperature sensors.
+Try running IntelliWatch as administrator.
+If it still shows 0C, your hardware does not support temperature reading via software.
+
+### WiFi shows incorrect label
+
+If your WiFi adapter name is not standard,
+IntelliWatch may show ETH or NET instead of WiFi.
+The speed values are still correct.
+
+### System is slow after launching
+
+IntelliWatch uses system resources for monitoring.
+If your system slows down, try closing other heavy applications first.
+The monitoring engine is set to low priority to minimize impact.
 
 ### Backend API returns 401 Unauthorized
 

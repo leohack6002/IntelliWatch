@@ -11,19 +11,25 @@ IntelliWatch is an AI-powered desktop monitoring application for Windows. It run
 
 ## Preview
 
-> Screenshots and demo GIF coming soon.
+The overlay sits at the bottom-right of your screen
+showing live system stats at a glance.
+Click the overlay to open the full
+IntelliWatch Command Center dashboard.
+
 > (Add overlay screenshot and dashboard screenshot here)
 
 ## Highlights
 
 - Compact always-on-top desktop overlay
 - Full React dashboard with live graphs
-- CPU, RAM, GPU, disk, network, battery, process, and temperature monitoring
+- CPU, RAM, Disk, Battery and Uptime monitoring
+- WiFi signal strength and upload/download speeds
+- GPU and Temperature monitoring (hardware dependent)
 - WebSocket updates every 2 seconds
 - Intelligent warning and critical alerts
 - AI anomaly detection with Isolation Forest
 - SQLite performance history
-- System tray support
+- System tray support with live stats tooltip
 - Windows auto-launch support in packaged builds
 - Optional FastAPI backend for metric history APIs
 
@@ -53,7 +59,9 @@ IntelliWatch is an AI-powered desktop monitoring application for Windows. It run
 2. Download **IntelliWatch Setup 0.1.0.exe**
 3. Double-click to install
 4. App auto-starts on next Windows login
-5. No terminal or coding needed!
+5. Overlay appears after 30 seconds
+6. Click overlay to open full dashboard
+7. No terminal or coding needed!
 
 ### For Developers
 ```powershell
@@ -179,22 +187,34 @@ installer/dist/
 | SQLite history | ✅ Working |
 | Windows installer | ✅ Working |
 | Auto-start on login | ✅ Working |
+| CPU monitoring | ✅ Working |
+| RAM monitoring | ✅ Working |
+| Disk monitoring | ✅ Working |
+| Battery monitoring | ✅ Working |
+| System uptime | ✅ Working |
+| WiFi signal strength | ✅ Working |
+| Upload/Download speeds | ✅ Working |
 | GPU monitoring | ⚠️ Hardware dependent |
+| Temperature monitoring | ⚠️ Hardware dependent |
 | Bundled Python runtime | 🔜 Planned |
 | Auto-update support | 🔜 Planned |
 | Linux / macOS support | 🔜 Planned |
 
 ## Known Limitations
 
-- GPU monitoring may be unavailable on unsupported systems
-- Auto-start works only with the packaged installer, not dev mode
+- GPU monitoring requires compatible hardware
+- Temperature monitoring requires compatible hardware
+- Auto-start works only with the packaged installer
+- Development mode requires terminal to stay open
 
 ## Troubleshooting
 
-- `node` not recognized: reinstall Node.js LTS
-- `python` not recognized: reinstall Python with Add to PATH
+- node not recognized: reinstall Node.js LTS
+- python not recognized: reinstall Python with Add to PATH
 - Overlay delay: wait 30 seconds, this is normal
 - GPU shows unavailable: hardware not supported, other features still work
+- Temperature shows 0C: hardware sensor not exposed, try running as administrator
+- WiFi shows ETH or NET: WiFi adapter name not detected, still shows correct speed
 
 ## Project Structure
 
