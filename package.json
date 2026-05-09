@@ -1,0 +1,65 @@
+{
+  "name": "intelliwatch",
+  "version": "0.1.0",
+  "private": false,
+  "description": "AI-powered desktop monitoring overlay with Electron, React, Python, and WebSockets.",
+  "main": "desktop/electron/main.js",
+  "scripts": {
+    "install:all": "npm install && npm --prefix desktop/react-ui install",
+    "setup": "powershell -ExecutionPolicy Bypass -File scripts/setup-windows.ps1",
+    "launch": "powershell -ExecutionPolicy Bypass -File scripts/launch-windows.ps1",
+    "dev": "concurrently \"npm:dev:engine\" \"npm:dev:ui\" \"wait-on http://127.0.0.1:5173 && electron .\"",
+    "dev:ui": "npm --prefix desktop/react-ui run dev",
+    "dev:engine": "powershell -ExecutionPolicy Bypass -File scripts/run-engine-windows.ps1",
+    "start": "electron .",
+    "check:python": "python scripts/check_python.py",
+    "build:ui": "npm --prefix desktop/react-ui run build",
+    "build": "npm run build:ui && electron-builder",
+    "backend": "python -m uvicorn backend.fastapi.main:app --reload --host 127.0.0.1 --port 8787"
+  },
+  "keywords": [
+    "electron",
+    "react",
+    "system-monitor",
+    "desktop-overlay",
+    "ai-monitoring",
+    "windows"
+  ],
+  "author": "IntelliWatch Contributors",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0",
+    "python": ">=3.11.0"
+  },
+  "dependencies": {
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7",
+    "wait-on": "^8.0.2"
+  },
+  "devDependencies": {
+    "electron": "^42.0.1",
+    "electron-builder": "^26.8.1"
+  },
+  "build": {
+    "appId": "com.intelliwatch.desktop",
+    "productName": "IntelliWatch",
+    "directories": {
+      "output": "installer/dist"
+    },
+    "files": [
+      "desktop/electron/**/*",
+      "desktop/react-ui/dist/**/*",
+      "monitoring-engine/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "monitoring-engine/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "signAndEditExecutable": false
+    }
+  }
+}

@@ -1,0 +1,16 @@
+node_modules/
+dist/
+build/
+.vite/
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.db
+*.sqlite
+*.log
+installer/dist/
+desktop/react-ui/node_modules/
+desktop/react-ui/dist/
+.env
+.env.local
